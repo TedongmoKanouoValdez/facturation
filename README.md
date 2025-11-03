@@ -5,7 +5,7 @@ Elle permet de créer des produits, gérer les prix et les taux de TVA, créer d
 Le projet inclut le backend en Java Spring Boot avec une base de données PostgreSQL (hébergée sur Supabase).
 
 # Stack technique
-Backend : Java 17, Spring Boot, Spring Data JPA, Hibernate, Lombok
+Backend : Java 21, Spring Boot, Spring Data JPA, Hibernate, Lombok
 Base de données : PostgreSQL (Supabase)
 PDF : iText (version com.lowagie.text)
 API : REST pour la gestion des produits, TVA, prix et factures
