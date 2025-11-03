@@ -1,5 +1,8 @@
 package com.okayo.facturation.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
@@ -10,6 +13,7 @@ import java.time.LocalDate;
 public class TauxTva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY) // <-- evite de pre remplir l'id
     private Long id;
 
     private Double taux;
@@ -18,5 +22,6 @@ public class TauxTva {
 
     @ManyToOne
     @JoinColumn(name = "produit_id", nullable = false)
+    @JsonIgnore
     private CatalogueProduit produit;
 }

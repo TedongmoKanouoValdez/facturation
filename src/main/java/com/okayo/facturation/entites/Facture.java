@@ -1,6 +1,8 @@
 package com.okayo.facturation.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.okayo.facturation.emun.StatutFacture;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
@@ -12,6 +14,7 @@ import java.util.List;
 public class Facture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY) // <-- evite de pre remplir l'id
     private Long id;
 
     private String reference;
@@ -22,16 +25,20 @@ public class Facture {
     private Integer totalTtcCentimes = 0;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "statut")
     private StatutFacture statut = StatutFacture.BROUILLON;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnore
     private Client client;
 
     @ManyToOne
     @JoinColumn(name = "emetteur_id", nullable = false)
+    @JsonIgnore
     private Emetteur emetteur;
 
     @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<LigneFacture> ligneFactures;
 }

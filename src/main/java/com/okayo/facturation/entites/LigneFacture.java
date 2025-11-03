@@ -1,5 +1,7 @@
 package com.okayo.facturation.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,6 +11,7 @@ import lombok.Data;
 public class LigneFacture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY) // <-- evite de pre remplir l'id
     private Long id;
 
     private String libelleSnapshot;
@@ -22,5 +25,6 @@ public class LigneFacture {
 
     @ManyToOne
     @JoinColumn(name = "facture_id", nullable = false)
+    @JsonIgnore
     private Facture facture;
 }

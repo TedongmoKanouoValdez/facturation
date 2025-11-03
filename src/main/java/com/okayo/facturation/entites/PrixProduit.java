@@ -1,5 +1,7 @@
 package com.okayo.facturation.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,6 +13,7 @@ import java.time.LocalDate;
 public class PrixProduit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY) // <-- evite de pre remplir l'id
     private Long id;
 
     private Integer prixHtCentimes;
@@ -19,5 +22,6 @@ public class PrixProduit {
 
     @ManyToOne
     @JoinColumn(name = "produit_id", nullable = false)
+    @JsonIgnore
     private CatalogueProduit produit;
 }
