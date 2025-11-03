@@ -28,12 +28,12 @@ public class Facture {
     @Column(name = "statut")
     private StatutFacture statut = StatutFacture.BROUILLON;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id", nullable = false)
     @JsonIgnore
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emetteur_id", nullable = false)
     @JsonIgnore
     private Emetteur emetteur;
